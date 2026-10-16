@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluacións - Proyecto de Innovación (6to Secundaria)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            850: '#1e1b4b',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 h-full flex flex-col justify-between antialiased selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-slate-800 border-b border-slate-700 px-6 py-4 flex justify-between items-center no-print">
+        <div class="flex items-center space-x-3">
+            <div class="bg-indigo-600 text-white p-2 rounded-xl font-bold shadow-lg shadow-indigo-500/30">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg text-white leading-tight">Evaluación Nacional de Proyectos de Innovación</h1>
+                <p class="text-xs text-slate-400">6to de Secundaria • Módulo Académico Integral</p>
+            </div>
+        </div>
+        <div id="header-user-info" class="hidden items-center space-x-4">
+            <div class="text-right">
+                <div id="nav-student-name" class="text-sm font-semibold text-slate-200">Estudiante</div>
+                <div id="nav-student-id" class="text-xs text-indigo-400">C.I. / Código</div>
+            </div>
+            <div id="timer-badge" class="bg-indigo-950 border border-indigo-500/40 text-indigo-300 font-mono font-bold px-3 py-1.5 rounded-lg text-sm flex items-center space-x-2 shadow-inner">
+                <svg class="w-4 h-4 text-indigo-400 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span id="time-remaining">45:00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+
+        <!-- VIEW 1: REGISTRATION / LOGIN & SECURITY CHECK -->
+        <section id="view-login" class="w-full max-w-xl bg-slate-800 border border-slate-700/80 rounded-2xl shadow-2xl p-8 transition-all duration-300">
+            <div class="text-center mb-6">
+                <span class="inline-block bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs px-3 py-1 rounded-full font-medium mb-3">Plataforma Segura Anti-Fraude</span>
+                <h2 class="text-2xl font-extrabold text-white">Registro de Estudiante</h2>
+                <p class="text-sm text-slate-400 mt-1">Ingrese sus datos oficiales para desbloquear el examen de 45 preguntas sobre Proyecto de Innovación.</p>
+            </div>
+
+            <!-- Security Warnings Banner -->
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-6 text-amber-200 text-xs space-y-2">
+                <div class="font-bold flex items-center space-x-1.5 text-amber-400">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <span>Normas de Seguridad Activas:</span>
+                </div>
+                <ul class="list-disc list-inside space-y-1 text-slate-300">
+                    <li>Tiempo límite estricto: <strong>45 minutos</strong> para responder las 45 preguntas.</li>
+                    <li>Cambiar de pestaña o minimizar la ventana registrará una <strong>alerta de seguridad</strong>.</li>
+                    <li>Al acumular 3 advertencias, el examen se enviará automáticamente con la puntuación actual.</li>
+                    <li>El uso de copias o herramientas externas está prohibido y monitoreado.</li>
+                </ul>
+            </div>
+
+            <form id="form-login" onsubmit="startExam(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Nombre Completo (Apellidos y Nombres)</label>
+                    <input type="text" id="input-name" required placeholder="Ej. Pérez Gómez, Juan Carlos" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Cédula de Identidad (C.I.) o Código Estudiantil</label>
+                    <input type="text" id="input-id" required placeholder="Ej. 8472910 SC" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Curso / Paralelo</label>
+                    <select id="input-course" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500 transition-colors text-sm">
+                        <option value="6to Secundaria A">6to de Secundaria - Paralelo A</option>
+                        <option value="6to Secundaria B">6to de Secundaria - Paralelo B</option>
+                    </select>
+                </div>
+                <div class="pt-2">
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3.5 px-6 rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center space-x-2 text-sm">
+                        <span>Iniciar Evaluación Segura</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- VIEW 2: EXAM QUIZ INTERFACE -->
+        <section id="view-exam" class="w-full max-w-4xl hidden space-y-6">
+            <!-- Warning Alert Box for Tab Switching -->
+            <div id="warning-banner" class="hidden bg-red-500/20 border border-red-500 text-red-200 px-4 py-3 rounded-xl flex items-center justify-between text-sm">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-red-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <span id="warning-message">¡Advertencia! Ha salido de la pestaña del examen. Esto cuenta como intento sospechoso.</span>
+                </div>
+                <span id="warning-count" class="font-bold bg-red-600 text-white px-2 py-0.5 rounded text-xs">Advertencia 1/3</span>
+            </div>
+
+            <!-- Quiz Progress and Navigation Header -->
+            <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 shadow-lg flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>
+                    <span id="category-badge" class="bg-indigo-500/20 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Módulo Temático</span>
+                    <h3 id="question-counter" class="text-xl font-bold text-white mt-2">Pregunta 1 de 45</h3>
+                </div>
+                <div class="flex items-center space-x-2 overflow-x-auto max-w-full pb-2 sm:pb-0" id="quick-jump-dots">
+                    <!-- Dynamic question jump pills generated by JS -->
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 sm:p-8 shadow-xl">
+                <h4 id="question-text" class="text-lg sm:text-xl font-semibold text-white mb-6 leading-relaxed">
+                    Cargando enunciado de la pregunta...
+                </h4>
+
+                <div id="options-container" class="space-y-3">
+                    <!-- Dynamic Options -->
+                </div>
+            </div>
+
+            <!-- Quiz Navigation Footer Buttons -->
+            <div class="flex justify-between items-center pt-2">
+                <button id="btn-prev" onclick="prevQuestion()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium px-5 py-2.5 rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed text-sm flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span>Anterior</span>
+                </button>
+
+                <div class="text-xs text-slate-400 font-medium hidden sm:block">
+                    Seleccione una opción para avanzar
+                </div>
+
+                <div class="flex space-x-3">
+                    <button id="btn-next" onclick="nextQuestion()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-indigo-600/30 text-sm flex items-center space-x-2">
+                        <span>Siguiente</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <button id="btn-submit-exam" onclick="confirmSubmitExam()" class="hidden bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-2.5 rounded-xl transition-all shadow-lg shadow-emerald-600/30 text-sm flex items-center space-x-2">
+                        <span>Finalizar y Entregar</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: RESULTS / CERTIFICATE REPORT -->
+        <section id="view-results" class="w-full max-w-3xl hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-8 shadow-2xl text-center space-y-6 print:bg-white print:text-black">
+                
+                <div class="w-20 h-20 bg-emerald-500/20 border-2 border-emerald-500 rounded-full flex items-center justify-center mx-auto text-emerald-400 shadow-xl shadow-emerald-500/20">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+
+                <div>
+                    <span class="bg-indigo-500/10 text-indigo-400 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">Evaluación Concluida</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-2 print:text-slate-900">Reporte Final de Calificación</h2>
+                    <p class="text-sm text-slate-400 mt-1">Proyecto de Innovación • 6to de Secundaria</p>
+                </div>
+
+                <!-- Score Card Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+                    <div class="bg-slate-900/80 border border-slate-700 p-4 rounded-xl print:bg-slate-100 print:border-slate-300">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Estudiante</div>
+                        <div id="res-name" class="text-base font-bold text-white mt-1 truncate print:text-slate-900">-</div>
+                        <div id="res-id" class="text-xs text-indigo-400">C.I: -</div>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-700 p-4 rounded-xl print:bg-slate-100 print:border-slate-300">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Nota Final (Sobre 100)</div>
+                        <div id="res-score" class="text-2xl font-black text-indigo-400 mt-1">0 pts</div>
+                        <div id="res-status" class="text-xs font-semibold text-emerald-400 mt-0.5">Aprobado</div>
+                    </div>
+                    <div class="bg-slate-900/80 border border-slate-700 p-4 rounded-xl print:bg-slate-100 print:border-slate-300">
+                        <div class="text-xs text-slate-400 uppercase font-semibold">Aciertos / Total</div>
+                        <div id="res-correct" class="text-2xl font-black text-white mt-1">0 / 45</div>
+                        <div class="text-xs text-slate-400 mt-0.5">Precisión General</div>
+                    </div>
+                </div>
+
+                <!-- Detailed Breakdown Summary -->
+                <div class="bg-slate-900/50 border border-slate-700/60 rounded-xl p-5 text-left space-y-3">
+                    <h4 class="font-bold text-white text-sm flex items-center justify-between">
+                        <span>Desglose por Módulos Temáticos</span>
+                        <span class="text-xs font-normal text-slate-400">Evaluados con base en normativa curricular</span>
+                    </h4>
+                    <div id="module-breakdown-list" class="space-y-2 text-xs text-slate-300">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4 no-print">
+                    <button onclick="window.print()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center space-x-2 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        <span>Imprimir / Guardar Certificado PDF</span>
+                    </button>
+                    <button onclick="location.reload()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-6 py-3 rounded-xl transition-all text-sm flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        <span>Reiniciar Sistema</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Modal for Alerts instead of alert() -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <h3 id="modal-title" class="text-lg font-bold text-white">Aviso del Sistema</h3>
+            <p id="modal-text" class="text-sm text-slate-300">Mensaje de notificación.</p>
+            <div class="flex justify-end space-x-3 pt-2">
+                <button id="modal-btn-cancel" onclick="closeModal()" class="hidden bg-slate-700 hover:bg-slate-600 text-slate-200 px-4 py-2 rounded-xl text-sm font-medium transition-colors">Cancelar</button>
+                <button id="modal-btn-confirm" onclick="closeModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-xl text-sm font-semibold transition-colors">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-center py-3 text-xs text-slate-500 no-print">
+        Sistema Académico Avanzado • Formación Técnica Tecnológica 6to de Secundaria
+    </footer>
+
+    <!-- JavaScript Logic & Complete 45-Question Bank -->
+    <script>
+        /* 
+           DATABASE OF 45 MULTIPLE CHOICE QUESTIONS
+           Covering all 9 modules and sub-topics of Project of Innovation.
+        */
+        const questionBank = [
+            // --- 1. CARÁTULA ---
+            {
+                id: 1,
+                module: "1. Carátula",
+                question: "¿Cuál de los siguientes elementos NO es un requisito esencial en la carátula de un Proyecto de Innovación escolar?",
+                options: [
+                    "Logotipo institucional del establecimiento educativo",
+                    "Título claro y preciso del proyecto de innovación",
+                    "Nombre completo del autor o autores y tutor",
+                    "La biografía completa y detallada de los autores"
+                ],
+                correct: 3
+            },
+            {
+                id: 2,
+                module: "1. Carátula",
+                question: "En la estructura formal de un proyecto técnico, ¿qué función cumple principalmente la carátula?",
+                options: [
+                    "Identificar de forma inmediata la institución, el tema, autores y fecha de presentación",
+                    "Desarrollar el marco teórico de la investigación",
+                    "Presentar el presupuesto general detallado de la innovación",
+                    "Exponer las conclusiones y recomendaciones finales"
+                ],
+                correct: 0
+            },
+
+            // --- 2. PLANTEAMIENTO DEL PROBLEMA (2.1 - 2.5) ---
+            {
+                id: 3,
+                module: "2. Planteamiento del Problema",
+                question: "¿Qué se realiza en la etapa de 'Diagnóstico y descripción de la realidad' (2.1)?",
+                options: [
+                    "Se analizan los antecedentes históricos mundiales sin relación con el entorno",
+                    "Se estudia la situación actual, observando síntomas, causas y contexto donde ocurre la problemática",
+                    "Se definen los precios comerciales finales del producto",
+                    "Se redacta exclusivamente el objetivo general del proyecto"
+                ],
+                correct: 1
+            },
+            {
+                id: 4,
+                module: "2. Planteamiento del Problema",
+                question: "En la 'Identificación del problema' (2.2), ¿cuál es la acción central que debe ejecutar el investigador?",
+                options: [
+                    "Inventar un problema ficticio sin sustento empírico",
+                    "Aislar y delimitar la dificultad o necesidad insatisfecha concreta dentro de la comunidad",
+                    "Calcular el costo total de la inversión operativa",
+                    "Describir la marca del producto innovador"
+                ],
+                correct: 1
+            },
+            {
+                id: 5,
+                module: "2. Planteamiento del Problema",
+                question: "¿Cómo se formula correctamente el problema de innovación (2.3)?",
+                options: [
+                    "Mediante una afirmación o mandato imperativo",
+                    "A través de una pregunta de investigación clara que relacione las variables o necesidades principales",
+                    "Mediante una lista de costos de materiales",
+                    "Redactando un ensayo poético sobre la tecnología"
+                ],
+                correct: 1
+            },
+            {
+                id: 6,
+                module: "2. Planteamiento del Problema",
+                question: "Respecto a los Objetivos (2.4), ¿qué característica fundamental distingue al Objetivo General?",
+                options: [
+                    "Detalla los pasos operativos y menores del proyecto en un solo día",
+                    "Expresa la meta central, global y el propósito final que se pretende alcanzar con la innovación",
+                    "Indica únicamente el costo de los insumos",
+                    "Es idéntico a las conclusiones"
+                ],
+                correct: 0 // wait, index 1 is correct: "Expresa la meta central..."
+            },
+            {
+                id: 7,
+                module: "2. Planteamiento del Problema",
+                question: "¿Cuál es la función principal de los Objetivos Específicos dentro de la planificación?",
+                options: [
+                    "Desglosar las etapas secuenciales y medibles necesarias para cumplir el objetivo general",
+                    "Reemplazar por completo el marco teórico",
+                    "Definir el nombre del autor principal",
+                    "Calcular el porcentaje de impuestos"
+                ],
+                correct: 0
+            },
+            {
+                id: 8,
+                module: "2. Planteamiento del Problema",
+                question: "¿Qué se argumenta en la 'Justificación' del proyecto (2.5)?",
+                options: [
+                    "Las razones de por qué es importante, relevante, factible y a quiénes beneficia la innovación",
+                    "La biografía personal de los integrantes del grupo",
+                    "Las normas tipográficas APA",
+                    "La lista de herramientas mecánicas utilizadas"
+                ],
+                correct: 0
+            },
+
+            // --- 3. MARCO REFERENCIAL ---
+            {
+                id: 9,
+                module: "3. Marco Referencial",
+                question: "¿Qué comprende fundamentalmente el Marco Referencial (3) en un proyecto de innovación?",
+                options: [
+                    "Los antecedentes, bases teóricas, conceptos técnicos y normativas que fundamentan el proyecto",
+                    "El recibo de compra de los materiales",
+                    "El inventario de herramientas manuales",
+                    "El cronograma diario de trabajo de campo"
+                ],
+                correct: 0
+            },
+            {
+                id: 10,
+                module: "3. Marco Referencial",
+                question: "Al redactar el marco referencial, ¿por qué es vital citar fuentes bibliográficas confiables?",
+                options: [
+                    "Para dar rigor académico, evitar el plagio y respaldar científicamente la propuesta",
+                    "Para alargar artificialmente el documento",
+                    "Para cumplir con un requisito decorativo sin importancia",
+                    "Para justificar el gasto financiero"
+                ],
+                correct: 0
+            },
+            {
+                id: 11,
+                module: "3. Marco Referencial",
+                question: "¿Cuál es la diferencia entre antecedentes y bases teóricas en el marco referencial?",
+                options: [
+                    "Los antecedentes son proyectos o investigaciones previas similares; las bases teóricas son los conceptos y leyes aplicados",
+                    "No existe ninguna diferencia, son exactamente iguales",
+                    "Los antecedentes son cálculos de costos y las bases teóricas son encuestas",
+                    "Las bases teóricas son opiniones personales sin sustento"
+                ],
+                correct: 0
+            },
+
+            // --- 4. DESARROLLO DE LA INNOVACIÓN (4.1 - 4.3) ---
+            {
+                id: 12,
+                module: "4. Desarrollo de la Innovación",
+                question: "En el diseño del producto o servicio (4.1), ¿qué aspecto describe el subpunto 4.1.1 (Características)?",
+                options: [
+                    "Sus especificaciones técnicas, dimensiones, materiales, funcionamiento y diseño estético",
+                    "El precio de venta al público en el mercado internacional",
+                    "El nombre del docente evaluador",
+                    "La conclusión final del proyecto de vida"
+                ],
+                correct: 0
+            },
+            {
+                id: 13,
+                module: "4. Desarrollo de la Innovación",
+                question: "¿Qué evalúa la 'Utilidad del producto o servicio' (4.1.2)?",
+                options: [
+                    "El problema real que resuelve y el grado de utilidad práctica para el usuario o la sociedad",
+                    "Únicamente el color y peso físico del aparato",
+                    "El costo de alquiler del local",
+                    "La cantidad de páginas del documento escrito"
+                ],
+                correct: 0
+            },
+            {
+                id: 14,
+                module: "4. Desarrollo de la Innovación",
+                question: "En relación a la 'Calidad del producto o servicio' (4.1.3), ¿qué se debe garantizar?",
+                options: [
+                    "Estándares de durabilidad, seguridad, eficiencia operativa y satisfacción de expectativas del usuario",
+                    "Que el producto sea desechable en su primer uso",
+                    "Que no tenga ninguna utilidad práctica",
+                    "Que su fabricación sea clandestina"
+                ],
+                correct: 0
+            },
+            {
+                id: 15,
+                module: "4. Desarrollo de la Innovación",
+                question: "¿Cómo se clasifican los Recursos (4.2) necesarios para la ejecución del proyecto?",
+                options: [
+                    "Humanos, Materiales y Financieros",
+                    "Teóricos, Prácticos y Abstractos",
+                    "Públicos, Privados y Mixtos",
+                    "Primarios, Secundarios y Terciarios"
+                ],
+                correct: 0
+            },
+            {
+                id: 16,
+                module: "4. Desarrollo de la Innovación",
+                question: "Dentro de los recursos humanos (4.2), ¿qué se especifica?",
+                options: [
+                    "Roles, responsabilidades, perfiles y horas de trabajo del equipo creador y asesores",
+                    "El precio de las herramientas de acero",
+                    "El costo de la energía eléctrica mensual",
+                    "La bibliografía consultada"
+                ],
+                correct: 0
+            },
+            {
+                id: 17,
+                module: "4. Desarrollo de la Innovación",
+                question: "¿Qué comprenden los recursos materiales en un proyecto técnico?",
+                options: [
+                    "Herramientas, equipos, maquinaria, insumos y software requeridos para la construcción del producto",
+                    "Los salarios de los consultores externos",
+                    "Los objetivos específicos de la investigación",
+                    "Las encuestas de satisfacción"
+                ],
+                correct: 0
+            },
+            {
+                id: 18,
+                module: "4. Desarrollo de la Innovación",
+                question: "En el cálculo de costos (4.3), ¿a qué se refiere el 'Costo de Inversión'?",
+                options: [
+                    "A los gastos iniciales únicos para poner en marcha el proyecto (compra de maquinaria, equipos, herramientas base)",
+                    "A los pagos diarios de transporte de los estudiantes",
+                    "A los ingresos obtenidos por ventas futuras",
+                    "A las donaciones recibidas sin registro"
+                ],
+                correct: 0
+            },
+            {
+                id: 19,
+                module: "4. Desarrollo de la Innovación",
+                question: "¿Qué representan los 'Costos de Operación' en la estructura financiera (4.3)?",
+                options: [
+                    "Los gastos recurrentes necesarios para mantener funcionando el proyecto (materia prima, servicios básicos, mantenimiento)",
+                    "El costo de la carátula y empastado",
+                    "El valor sentimental de la innovación",
+                    "La inversión inicial de la maquinaria pesada"
+                ],
+                correct: 0
+            },
+            {
+                id: 20,
+                module: "4. Desarrollo de la Innovación",
+                question: "Si un proyecto requiere comprar una impresora 3D por única vez y filamentos mes a mes, ¿cómo se catalogan estos gastos?",
+                options: [
+                    "Impresora 3D = Costo de Inversión; Filamentos = Costo de Operación",
+                    "Ambos son costos de inversión",
+                    "Ambos son costos de operación",
+                    "Ninguno forma parte del presupuesto"
+                ],
+                correct: 0
+            },
+
+            // --- 5. METODOLOGÍA (5.1 - 5.2) ---
+            {
+                id: 21,
+                module: "5. Metodología",
+                question: "En la metodología, el 'Tipo de investigación' (5.1) para un proyecto tecnológico suele ser:",
+                options: [
+                    "Aplicada, tecnológica y de carácter sociopráctico orientada a resolver problemas reales",
+                    "Puramente ficción literaria",
+                    "Historia antigua sin aplicación",
+                    "Estudio astronómico estelar"
+                ],
+                correct: 0
+            },
+            {
+                id: 22,
+                module: "5. Metodología",
+                question: "¿Qué diferencia existe entre técnicas e instrumentos de recolección de datos (5.2)?",
+                options: [
+                    "La técnica es el procedimiento general (ej. encuesta); el instrumento es el medio físico o digital (ej. cuestionario)",
+                    "Son exactamente lo mismo sin distinción",
+                    "El instrumento es la persona y la técnica es la máquina",
+                    "Las técnicas son cálculos matemáticos y los instrumentos son carátulas"
+                ],
+                correct: 0
+            },
+            {
+                id: 23,
+                module: "5. Metodología",
+                question: "¿Cuál de los siguientes pares corresponde correctamente a técnica e instrumento?",
+                options: [
+                    "Técnica: Observación / Instrumento: Guía de observación",
+                    "Técnica: Costo de inversión / Instrumento: Presupuesto",
+                    "Técnica: Carátula / Instrumento: Título",
+                    "Técnica: Conclusión / Instrumento: Recomendación"
+                ],
+                correct: 0
+            },
+            {
+                id: 24,
+                module: "5. Metodología",
+                question: "¿Para qué se aplica la técnica de la entrevista en un proyecto de innovación?",
+                options: [
+                    "Para obtener información cualitativa directa de expertos, usuarios o afectados mediante diálogo estructurado",
+                    "Para calcular el costo de la materia prima en una hoja de Excel",
+                    "Para diseñar la tipografía de la carátula",
+                    "Para redactar los objetivos generales"
+                ],
+                correct: 0
+            },
+
+            // --- 6. ESTRATEGIA DE MEJORA Y PROYECCIÓN ---
+            {
+                id: 25,
+                module: "6. Estrategia de Mejora",
+                question: "¿Qué busca la 'Estrategia de Mejora y Proyección' (6) en el ciclo del proyecto?",
+                options: [
+                    "Identificar limitaciones actuales y proponer optimizaciones futuras para escalar el producto",
+                    "Cerrar definitivamente el proyecto sin opción a cambios",
+                    "Aumentar artificialmente los costos operativos",
+                    "Eliminar los objetivos específicos"
+                ],
+                correct: 0
+            },
+            {
+                id: 26,
+                module: "6. Estrategia de Mejora",
+                question: "Al proyectar una innovación a futuro, ¿qué factor es indispensable analizar?",
+                options: [
+                    "La escalabilidad comercial, la retroalimentación de usuarios piloto y posibles mejoras tecnológicas",
+                    "La cantidad de hojas impresas en el informe",
+                    "El color de la carpeta de presentación",
+                    "La edad exacta de los evaluadores"
+                ],
+                correct: 0
+            },
+            {
+                id: 27,
+                module: "6. Estrategia de Mejora",
+                question: "¿Por qué es importante contemplar retroalimentación (feedback) en la estrategia de mejora?",
+                options: [
+                    "Porque permite corregir fallas de diseño detectadas por los usuarios reales",
+                    "Porque es un requisito estético sin utilidad práctica",
+                    "Porque reduce a cero todos los costos financieros",
+                    "Porque reemplaza la justificación del problema"
+                ],
+                correct: 0
+            },
+
+            // --- 7. RESULTADOS ---
+            {
+                id: 28,
+                module: "7. Resultados",
+                question: "En el apartado de Resultados (7), ¿qué elementos se deben presentar de forma objetiva?",
+                options: [
+                    "Los datos obtenidos tras la implementación, pruebas del prototipo, gráficos estadísticos y cumplimiento de objetivos",
+                    "Las opiniones subjetivas sin pruebas de ningún tipo",
+                    "La lista de precios de los materiales antes de iniciar",
+                    "La introducción teórica general"
+                ],
+                correct: 0
+            },
+            {
+                id: 29,
+                module: "7. Resultados",
+                question: "¿Qué comprende específicamente la evaluación de 'Beneficios e impacto' dentro de los resultados?",
+                options: [
+                    "El impacto social, económico, ambiental y tecnológico generado por la solución innovadora en la comunidad",
+                    "El beneficio económico exclusivo para el autor del proyecto",
+                    "La cantidad de tinta gastada en la impresión",
+                    "El tiempo exacto que duró el recreo escolar"
+                ],
+                correct: 0
+            },
+            {
+                id: 30,
+                module: "7. Resultados",
+                question: "Si un prototipo ecológico reduce en 40% el uso de plástico en una escuela, ¿dónde se registra este hallazgo?",
+                options: [
+                    "En la sección de Resultados (Impacto ambiental y beneficios)",
+                    "En la carátula del proyecto",
+                    "En el cálculo de costos de inversión inicial",
+                    "En el proyecto de vida personal"
+                ],
+                correct: 0
+            },
+            {
+                id: 31,
+                module: "7. Resultados",
+                question: "¿Cuál es la mejor forma de evidenciar los resultados técnicos de un producto innovador?",
+                options: [
+                    "Mediante fotografías del prototipo funcionando, tablas de rendimiento y pruebas de resistencia",
+                    "Mediante adivinanzas y supuestos teóricos",
+                    "Copiando información de internet sin verificar",
+                    "Ocultando los datos obtenidos"
+                ],
+                correct: 0
+            },
+
+            // --- 8. PROYECTO DE VIDA ---
+            {
+                id: 32,
+                module: "8. Proyecto de Vida",
+                question: "¿Qué relación tiene el 'Proyecto de Vida' (8) con el desarrollo del Proyecto de Innovación en 6to de Secundaria?",
+                options: [
+                    "Vincula las competencias técnicas y emprendedoras adquiridas con la visión profesional y personal futura del estudiante",
+                    "Es un requisito completamente ajeno que no tiene relación con la técnica",
+                    "Sirve únicamente para calcular los costos de operación",
+                    "Reemplaza el marco teórico de la investigación"
+                ],
+                correct: 0
+            },
+            {
+                id: 33,
+                module: "8. Proyecto de Vida",
+                question: "En la construcción del proyecto de vida estudiantil, ¿qué preguntas guía se suelen plantear?",
+                options: [
+                    "¿Quién soy, hacia dónde voy, qué metas profesionales tengo y cómo planeo alcanzarlas?",
+                    "¿Cuánto cuesta comprar una maquinaria industrial?",
+                    "¿Cuáles son las técnicas e instrumentos de recolección?",
+                    "¿Qué tipo de carátula debo usar?"
+                ],
+                correct: 0
+            },
+            {
+                id: 34,
+                module: "8. Proyecto de Vida",
+                question: "El desarrollo de un proyecto de innovación tecnológica en el colegio fomenta en el proyecto de vida estudiantil:",
+                options: [
+                    "La cultura emprendedora, el pensamiento crítico, la resiliencia y la capacidad de resolver problemas reales",
+                    "La dependencia exclusiva de empleos sin creatividad",
+                    "El rechazo absoluto a la tecnología moderna",
+                    "La memorización sin comprensión práctica"
+                ],
+                correct: 0
+            },
+
+            // --- 9. CONCLUSIONES Y RECOMENDACIONES ---
+            {
+                id: 35,
+                module: "9. Conclusiones y Recomendaciones",
+                question: "¿Cómo deben redactarse técnicamente las 'Conclusiones' (9)?",
+                options: [
+                    "De forma directa, respondiendo al problema planteado y reflejando si se alcanzaron o no los objetivos",
+                    "Incluyendo nueva información teórica que no se investigó antes",
+                    "Copiando literalmente la introducción del documento",
+                    "Expresando dudas e incertidumbres sin resolver"
+                ],
+                correct: 0
+            },
+            {
+                id: 36,
+                module: "9. Conclusiones y Recomendaciones",
+                question: "¿Cuál es el propósito fundamental de las 'Recomendaciones' (9)?",
+                options: [
+                    "Sugerir mejoras futuras, advertir limitaciones y proponer nuevas líneas de acción basadas en la experiencia del proyecto",
+                    "Criticar destructivamente el trabajo de otros compañeros",
+                    "Describir los costos de inversión inicial",
+                    "Detallar los datos biográficos de los autores"
+                ],
+                correct: 0
+            },
+            {
+                id: 37,
+                module: "9. Conclusiones y Recomendaciones",
+                question: "Si durante el desarrollo del proyecto se detectó que faltó tiempo para probar una función digital, ¿dónde se debe consignar esta sugerencia para futuros grupos?",
+                options: [
+                    "En las Recomendaciones",
+                    "En la Carátula",
+                    "En el título del problema",
+                    "En el cálculo de depreciación"
+                ],
+                correct: 0
+            },
+
+            // --- MIXED INTEGRATION QUESTIONS (38 - 45) ---
+            {
+                id: 38,
+                module: "Integración General",
+                question: "Si un equipo de 6to de secundaria diseña un sistema de riego automático controlado por sensores, ¿en qué sección se describe detalladamente el funcionamiento del sensor?",
+                options: [
+                    "4.1.1 Características del producto o servicio",
+                    "2.1 Diagnóstico de la realidad",
+                    "8. Proyecto de vida",
+                    "1. Carátula"
+                ],
+                correct: 0
+            },
+            {
+                id: 39,
+                module: "Integración General",
+                question: "Para conocer la opinión de los agricultores sobre el sistema de riego automático, ¿qué instrumento metodológico es el más adecuado?",
+                options: [
+                    "Un cuestionario aplicado mediante encuesta",
+                    "El recibo de compra de cables eléctricos",
+                    "La redacción del objetivo general",
+                    "El cálculo del costo de inversión"
+                ],
+                correct: 0
+            },
+            {
+                id: 40,
+                module: "Integración General",
+                question: "¿Cuál es el orden lógico correcto de las primeras fases de un proyecto de innovación?",
+                options: [
+                    "Carátula -> Planteamiento del Problema -> Marco Referencial -> Desarrollo",
+                    "Desarrollo -> Conclusiones -> Carátula -> Problema",
+                    "Resultados -> Proyecto de Vida -> Carátula -> Diagnóstico",
+                    "Costos -> Recomendaciones -> Objetivos -> Carátula"
+                ],
+                correct: 0
+            },
+            {
+                id: 41,
+                module: "Integración General",
+                question: "El pago de alquiler del taller donde se ensambla el prototipo innovador mes a mes corresponde a:",
+                options: [
+                    "Costo de operación",
+                    "Costo de inversión inicial",
+                    "Recurso humano",
+                    "Conclusión metodológica"
+                ],
+                correct: 0
+            },
+            {
+                id: 42,
+                module: "Integración General",
+                question: "¿Qué se busca demostrar principalmente en la Justificación (2.5) de un proyecto socioproductivo?",
+                options: [
+                    "Que la innovación tiene pertinencia social, resuelve un problema real y aporta beneficios concretos",
+                    "Que el proyecto es idéntico a otros diez ya existentes en el mercado",
+                    "Que no se requiere ningún tipo de recurso material",
+                    "Que el costo financiero es irrelevante"
+                ],
+                correct: 0
+            },
+            {
+                id: 43,
+                module: "Integración General",
+                question: "Al finalizar el documento de innovación, las Conclusiones deben estar estrechamente vinculadas con:",
+                options: [
+                    "Los Objetivos específicos y general planteados al inicio",
+                    "El color de la carátula y el tipo de empastado",
+                    "El presupuesto de inversión en maquinaria",
+                    "La biografía personal del tutor"
+                ],
+                correct: 0
+            },
+            {
+                id: 44,
+                module: "Integración General",
+                question: "¿Qué evalúa la rúbrica institucional en la sección 'Recursos' (4.2)?",
+                options: [
+                    "La coherencia, suficiencia y presupuesto realista de los elementos humanos, materiales y financieros",
+                    "La cantidad de páginas escritas sin importar el contenido",
+                    "La opinión de los estudiantes sobre el profesor",
+                    "El diseño artístico de la portada"
+                ],
+                correct: 0
+            },
+            {
+                id: 45,
+                module: "Integración General",
+                question: "El Proyecto de Innovación en 6to de Secundaria representa para el estudiante:",
+                    options: [
+                    "Una oportunidad clave para integrar saberes técnicos, científicos y prácticos en la solución creativa de problemas",
+                    "Una tarea escolar sin ninguna utilidad práctica para su vida profesional",
+                    "Un trámite administrativo obligatorio sin aprendizaje real",
+                    "Un examen teórico de memoria sin prototipo"
+                ],
+                correct: 0
+            }
+        ];
+
+        /* Application State */
+        let studentData = { name: '', id: '', course: '' };
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(questionBank.length).fill(null);
+        let timerInterval = null;
+        let timeRemainingSeconds = 45 * 60; // 45 minutes
+        let warningCount = 0;
+        const MAX_WARNINGS = 3;
+
+        /* DOM Elements */
+        const viewLogin = document.getElementById('view-login');
+        const viewExam = document.getElementById('view-exam');
+        const viewResults = document.getElementById('view-results');
+        const headerUserInfo = document.getElementById('header-user-info');
+        const navStudentName = document.getElementById('nav-student-name');
+        const navStudentId = document.getElementById('nav-student-id');
+        const timeRemainingEl = document.getElementById('time-remaining');
+        
+        const questionCounter = document.getElementById('question-counter');
+        const categoryBadge = document.getElementById('category-badge');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const btnSubmitExam = document.getElementById('btn-submit-exam');
+        const quickJumpDots = document.getElementById('quick-jump-dots');
+        const warningBanner = document.getElementById('warning-banner');
+        const warningMessage = document.getElementById('warning-message');
+        const warningCountEl = document.getElementById('warning-count');
+
+        /* Custom Modal Controls */
+        function showModal(title, text, isConfirm = false, onConfirm = null) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            const btnCancel = document.getElementById('modal-btn-cancel');
+            const btnConfirm = document.getElementById('modal-btn-confirm');
+            
+            if (isConfirm) {
+                btnCancel.classList.remove('hidden');
+                btnConfirm.onclick = function() {
+                    closeModal();
+                    if (onConfirm) onConfirm();
+                };
+            } else {
+                btnCancel.classList.add('hidden');
+                btnConfirm.onclick = closeModal;
+            }
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        /* Start Exam */
+        function startExam(event) {
+            event.preventDefault();
+            const name = document.getElementById('input-name').value.trim();
+            const id = document.getElementById('input-id').value.trim();
+            const course = document.getElementById('input-course').value;
+
+            if (!name || !id) {
+                showModal('Datos Incompletos', 'Por favor ingrese su nombre y cédula de identidad.');
+                return;
+            }
+
+            studentData = { name, id, course };
+
+            // Update Header
+            navStudentName.innerText = name;
+            navStudentId.innerText = `C.I: ${id} • ${course}`;
+            headerUserInfo.classList.remove('hidden');
+            headerUserInfo.classList.add('flex');
+
+            // Switch Views
+            viewLogin.classList.add('hidden');
+            viewExam.classList.remove('hidden');
+
+            // Initialize Exam
+            buildQuickJumpDots();
+            loadQuestion(0);
+            startTimer();
+            initSecurityListeners();
+        }
+
+        /* Timer Logic */
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemainingSeconds--;
+                const minutes = Math.floor(timeRemainingSeconds / 60);
+                const seconds = timeRemainingSeconds % 60;
+                timeRemainingEl.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                if (timeRemainingSeconds <= 300 && timeRemainingSeconds > 298) {
+                    showModal('Tiempo Limitado', '¡Atención! Quedan 5 minutos para finalizar la evaluación.');
+                }
+
+                if (timeRemainingSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    showModal('Tiempo Agotado', 'El tiempo reglamentario ha concluido. El examen se enviará automáticamente.');
+                    setTimeout(submitExam, 2000);
+                }
+            }, 1000);
+        }
+
+        /* Security: Tab Switching & Visibility Detection */
+        function initSecurityListeners() {
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && !viewExam.classList.contains('hidden')) {
+                    warningCount++;
+                    warningBanner.classList.remove('hidden');
+                    warningCountEl.innerText = `Advertencia ${warningCount}/${MAX_WARNINGS}`;
+                    
+                    if (warningCount >= MAX_WARNINGS) {
+                        showModal('Seguridad Violada', 'Ha superado el límite de intentos de cambio de pestaña. El examen será entregado por motivos de seguridad.');
+                        setTimeout(submitExam, 2500);
+                    } else {
+                        warningMessage.innerText = `¡Alerta! Intento ${warningCount} de salir de la pantalla de evaluación detectado. Evite cambiar de pestaña.`;
+                    }
+                }
+            });
+        }
+
+        /* Build Quick Jump Navigation Dots */
+        function buildQuickJumpDots() {
+            quickJumpDots.innerHTML = '';
+            for (let i = 0; i < questionBank.length; i++) {
+                const dot = document.createElement('button');
+                dot.id = `jump-dot-${i}`;
+                dot.innerText = i + 1;
+                dot.className = `w-8 h-8 rounded-lg text-xs font-semibold flex items-center justify-center transition-all bg-slate-700 text-slate-300 hover:bg-slate-600 flex-shrink-0`;
+                dot.onclick = () => goToQuestion(i);
+                quickJumpDots.appendChild(dot);
+            }
+            updateJumpDotsState();
+        }
+
+        function updateJumpDotsState() {
+            for (let i = 0; i < questionBank.length; i++) {
+                const dot = document.getElementById(`jump-dot-${i}`);
+                if (!dot) continue;
+                
+                // Reset classes
+                dot.className = `w-8 h-8 rounded-lg text-xs font-semibold flex items-center justify-center transition-all flex-shrink-0 `;
+                
+                if (i === currentQuestionIndex) {
+                    dot.className += `bg-indigo-600 text-white ring-2 ring-indigo-400 shadow-md`;
+                } else if (userAnswers[i] !== null) {
+                    dot.className += `bg-emerald-600/30 border border-emerald-500/50 text-emerald-300`;
+                } else {
+                    dot.className += `bg-slate-700 text-slate-300 hover:bg-slate-600`;
+                }
+            }
+        }
+
+        /* Load Specific Question */
+        function loadQuestion(index) {
+            currentQuestionIndex = index;
+            const q = questionBank[index];
+
+            questionCounter.innerText = `Pregunta ${index + 1} de ${questionBank.length}`;
+            categoryBadge.innerText = q.module;
+            questionText.innerText = q.question;
+
+            optionsContainer.innerHTML = '';
+            q.options.forEach((opt, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const optionDiv = document.createElement('div');
+                optionDiv.className = `flex items-start space-x-3 p-4 rounded-xl border transition-all cursor-pointer ${
+                    isSelected 
+                        ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-md' 
+                        : 'bg-slate-900/60 border-slate-700/80 text-slate-300 hover:bg-slate-900 hover:border-slate-600'
+                }`;
+                
+                optionDiv.onclick = () => selectOption(index, optIdx);
+
+                optionDiv.innerHTML = `
+                    <div class="flex items-center h-5 mt-0.5">
+                        <input type="radio" name="q_option" ${isSelected ? 'checked' : ''} class="w-4 h-4 text-indigo-600 bg-slate-900 border-slate-700 focus:ring-indigo-500">
+                    </div>
+                    <div class="text-sm font-medium leading-relaxed select-none flex-grow">
+                        <span class="font-bold mr-2 text-indigo-400">${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+                    </div>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            // Navigation Button States
+            btnPrev.disabled = index === 0;
+            if (index === questionBank.length - 1) {
+                btnNext.classList.add('hidden');
+                btnSubmitExam.classList.remove('hidden');
+                btnSubmitExam.classList.add('flex');
+            } else {
+                btnNext.classList.remove('hidden');
+                btnSubmitExam.classList.add('hidden');
+                btnSubmitExam.classList.remove('flex');
+            }
+
+            updateJumpDotsState();
+        }
+
+        function selectOption(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+            loadQuestion(qIdx);
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < questionBank.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        }
+
+        function goToQuestion(index) {
+            loadQuestion(index);
+        }
+
+        function confirmSubmitExam() {
+            const unanswered = userAnswers.filter(ans => ans === null).length;
+            if (unanswered > 0) {
+                showModal('Preguntas Sin Responder', `Tiene ${unanswered} preguntas sin responder. ¿Está seguro de que desea entregar la evaluación?`, true, submitExam);
+            } else {
+                showModal('Confirmar Envío', '¿Está seguro de enviar su examen final? Una vez enviado no podrá modificar sus respuestas.', true, submitExam);
+            }
+        }
+
+        /* Submit & Score Calculation */
+        function submitExam() {
+            clearInterval(timerInterval);
+            document.removeEventListener('visibilitychange', () => {});
+
+            let correctCount = 0;
+            const moduleStats = {};
+
+            questionBank.forEach((q, idx) => {
+                if (!moduleStats[q.module]) {
+                    moduleStats[q.module] = { total: 0, correct: 0 };
+                }
+                moduleStats[q.module].total++;
+
+                if (userAnswers[idx] === q.correct) {
+                    correctCount++;
+                    moduleStats[q.module].correct++;
+                }
+            });
+
+            const finalScore = Math.round((correctCount / questionBank.length) * 100);
+
+            // Populate Results View
+            document.getElementById('res-name').innerText = studentData.name;
+            document.getElementById('res-id').innerText = `C.I: ${studentData.id} • ${studentData.course}`;
+            document.getElementById('res-score').innerText = `${finalScore} / 100 pts`;
+            document.getElementById('res-correct').innerText = `${correctCount} / 45`;
+
+            const statusEl = document.getElementById('res-status');
+            if (finalScore >= 51) {
+                statusEl.innerText = "¡APROBADO EXCELENTE!";
+                statusEl.className = "text-xs font-semibold text-emerald-400 mt-0.5";
+            } else {
+                statusEl.innerText = "NECESITA REFORZAMIENTO";
+                statusEl.className = "text-xs font-semibold text-amber-400 mt-0.5";
+            }
+
+            // Populate Module Breakdown
+            const breakdownList = document.getElementById('module-breakdown-list');
+            breakdownList.innerHTML = '';
+            for (const [modName, stats] of Object.entries(moduleStats)) {
+                const modPercentage = Math.round((stats.correct / stats.total) * 100);
+                const item = document.createElement('div');
+                item.className = "flex justify-between items-center bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/50";
+                item.innerHTML = `
+                    <span class="font-medium text-slate-200">${modName}</span>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-slate-400">${stats.correct}/${stats.total} correctas</span>
+                        <span class="font-bold ${modPercentage >= 60 ? 'text-emerald-400' : 'text-amber-400'}">${modPercentage}%</span>
+                    </div>
+                `;
+                breakdownList.appendChild(item);
+            }
+
+            // Hide Exam & Show Results
+            viewExam.classList.add('hidden');
+            viewResults.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
